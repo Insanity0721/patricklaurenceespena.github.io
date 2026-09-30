@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Patrick Laurence J. Espeña — Full Stack Web Developer</title>
+  <meta name="description" content="Portfolio of Patrick Laurence J. Espeña, Full Stack Web Developer specializing in React.js, Node.js, PostgreSQL, Laravel, and AWS cloud workflows." />
+  <meta property="og:title" content="Patrick Laurence J. Espeña — Full Stack Web Developer" />
+  <meta property="og:description" content="Explore production web applications, PERN & Laravel stacks, AWS serverless pipelines, and Datadog observability systems." />
+  <meta property="og:type" content="website" />
+  <meta name="author" content="Patrick Laurence J. Espeña" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90' fill='%236366f1'>PE</text></svg>" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#eef2ff',
+              400: '#818cf8',
+              500: '#6366f1',
+              600: '#4f46e5',
+            }
+          },
+          fontFamily: {
+            mono: ['JetBrains Mono', 'Fira Code', 'Courier New', 'monospace'],
+            sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+          },
+          animation: {
+            'float-slow': 'float 7s ease-in-out infinite',
+            'scanline': 'scanline 8s linear infinite',
+            'beam-x': 'beamX 3s cubic-bezier(0.4, 0, 0.2, 1) infinite',
+            'mesh-spin': 'meshSpin 22s linear infinite',
+            'pulse-glow': 'pulseGlow 3s ease-in-out infinite',
+          },
+          keyframes: {
+            float: {
+              '0%, 100%': { transform: 'translateY(0px) rotate(0deg)' },
+              '50%': { transform: 'translateY(-12px) rotate(1deg)' },
+            },
+            scanline: {
+              '0%': { transform: 'translateY(-100%)' },
+              '100%': { transform: 'translateY(1000%)' },
+            },
+            beamX: {
+              '0%': { transform: 'translateX(-100%)' },
+              '100%': { transform: 'translateX(300%)' },
+            },
+            meshSpin: {
+              '0%': { transform: 'rotate(0deg) scale(1)' },
+              '50%': { transform: 'rotate(180deg) scale(1.18)' },
+              '100%': { transform: 'rotate(360deg) scale(1)' },
+            },
+            pulseGlow: {
+              '0%, 100%': { opacity: '0.45' },
+              '50%': { opacity: '0.9' },
+            }
+          }
+        }
+      }
+    };
+  </script>
+
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- External Stylesheet -->
+  <link rel="stylesheet" href="index.css" />
+</head>
+<body class="selection:bg-brand-500 selection:text-white bg-grid-pattern relative bg-slate-50 text-slate-800 dark:bg-[#06080e] dark:text-gray-200">
+  
+  <!-- Dynamic Interactive Particle Canvas -->
+  <canvas id="mesh-canvas"></canvas>
+
+  <!-- Scroll Progress Indicator -->
+  <div id="scroll-progress" class="fixed top-0 left-0 h-[3px] bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 z-50 transition-all duration-150" style="width: 0%;"></div>
+
+  <!-- Dynamic Cursor Flashlight Glow -->
+  <div id="cursor-glow" class="pointer-events-none fixed -inset-px z-30 transition-opacity duration-300 opacity-60 hidden md:block"></div>
+
+  <!-- Ambient Blurred Cosmic Orb -->
+  <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[650px] h-[650px] bg-indigo-500/10 dark:bg-indigo-600/10 rounded-full blur-[140px] pointer-events-none animate-mesh-spin -z-10"></div>
+
+  <!-- Sticky Navbar -->
+  <header class="sticky top-0 z-40 w-full glass-panel transition-all duration-200 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <a href="#home" class="nav-link flex items-center gap-2 group cursor-pointer">
+        <div class="relative">
+          <span class="absolute -inset-1 rounded-lg bg-indigo-500/30 blur-sm group-hover:bg-indigo-500/70 transition duration-300"></span>
+          <span class="relative h-8 w-8 rounded-lg bg-white dark:bg-[#0b0f19] border border-indigo-500/40 flex items-center justify-center font-mono font-bold text-indigo-600 dark:text-indigo-400 group-hover:text-indigo-500 dark:group-hover:text-white transition-colors shadow-sm">
+            PE
+          </span>
+        </div>
+        <span class="font-semibold tracking-tight text-slate-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-300 transition-colors">
+          Patrick Laurence Espeña
+        </span>
+      </a>
+
+      <!-- Desktop Nav Menu -->
+      <div class="hidden md:flex items-center space-x-1">
+        <div id="desktop-nav" class="flex items-center space-x-1"></div>
+
+        <!-- Theme Toggle Button -->
+        <button
+          type="button"
+          id="theme-toggle-btn"
+          class="p-2 ml-2 rounded-lg border border-slate-200 dark:border-gray-700/60 text-slate-700 dark:text-gray-300 hover:border-indigo-400 dark:hover:border-indigo-400 hover:bg-slate-100 dark:hover:bg-gray-800/50 transition-colors cursor-pointer"
+          title="Toggle Light / Dark Mode"
+          aria-label="Toggle Theme"
+        >
+          <i data-lucide="sun" class="w-4 h-4 text-amber-500 dark:text-amber-400"></i>
+        </button>
+
+        <a
+          href="#resume"
+          class="nav-link ml-3 px-3.5 py-1.5 rounded-md text-sm font-medium bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white shadow-md shadow-indigo-600/30 hover:shadow-indigo-600/50 hover:scale-[1.03] transition-all duration-200 cursor-pointer"
+        >
+          Resume
+        </a>
+      </div>
+
+      <!-- Mobile Controls -->
+      <div class="md:hidden flex items-center gap-2">
+        <button
+          type="button"
+          id="theme-toggle-mobile"
+          class="p-2 rounded-lg border border-slate-200 dark:border-gray-700/60 text-slate-700 dark:text-gray-300"
+          aria-label="Toggle theme"
+        >
+          <i data-lucide="sun" class="w-5 h-5 text-amber-500 dark:text-amber-400"></i>
+        </button>
+        <button
+          type="button"
+          id="mobile-menu-toggle"
+          class="p-2 rounded-md text-slate-700 dark:text-gray-400 hover:text-slate-950 dark:hover:text-white focus:outline-none"
+          aria-label="Toggle menu"
+        >
+          <i data-lucide="menu" class="w-6 h-6"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Dropdown -->
+    <div id="mobile-menu" class="hidden md:hidden border-b border-slate-200 dark:border-gray-800 bg-white/95 dark:bg-[#0b0f19]/95 px-4 pt-2 pb-4 space-y-1 shadow-lg"></div>
+  </header>
+
+  <main class="flex-grow relative z-10">
+    <!-- 1. HERO SECTION -->
+    <section id="home" class="scroll-mt-20 relative min-h-[92vh] flex items-center border-b border-slate-200 dark:border-gray-800/60 overflow-hidden py-16 lg:py-24">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
+        <div class="lg:col-span-7 space-y-6">
+          <div class="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full border border-indigo-500/30 bg-indigo-500/10 text-indigo-700 dark:text-indigo-300 text-xs font-mono font-medium shadow-sm">
+            <span class="relative flex h-2 w-2">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+            </span>
+            Available for Production Web Architecture
+          </div>
+          
+          <h1 id="hero-name" class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-tight"></h1>
+          
+          <div id="hero-title" class="text-xl sm:text-2xl font-mono text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-500 dark:from-indigo-400 dark:via-purple-300 dark:to-indigo-200 font-semibold animate-pulse-glow"></div>
+
+          <p id="hero-headline" class="text-slate-600 dark:text-gray-300 text-base sm:text-lg leading-relaxed max-w-2xl"></p>
+
+          <div class="flex flex-wrap items-center gap-3 pt-2">
+            <a href="#projects" class="nav-link px-5 py-2.5 rounded-lg bg-gradient-to-r from-indigo-600 to-indigo-500 hover:from-indigo-500 hover:to-indigo-400 text-white text-sm font-semibold transition-all duration-200 shadow-lg shadow-indigo-600/30 hover:scale-[1.03] active:scale-[0.98] cursor-pointer">
+              View Production Work
+            </a>
+            <button id="open-resume-btn-hero" class="px-5 py-2.5 rounded-lg border border-slate-300 dark:border-gray-700 hover:border-indigo-500 bg-white dark:bg-gray-900/70 text-slate-800 dark:text-white text-sm font-semibold transition-all duration-200 cursor-pointer flex items-center gap-2 shadow-sm hover:scale-[1.03] active:scale-[0.98]">
+              <i data-lucide="file-text" class="w-4 h-4 text-indigo-600 dark:text-indigo-400"></i>
+              View / Download Resume
+            </button>
+            <a href="#contact" class="nav-link px-5 py-2.5 rounded-lg border border-transparent text-slate-600 dark:text-gray-300 hover:text-slate-950 dark:hover:text-white hover:bg-slate-200/60 dark:hover:bg-gray-800 text-sm font-semibold transition-all cursor-pointer">
+              Contact Me
+            </a>
+          </div>
+
+          <div class="flex flex-wrap items-center gap-6 pt-4 text-xs font-mono text-slate-500 dark:text-gray-400 border-t border-slate-200 dark:border-gray-800/80">
+            <span class="flex items-center gap-1.5">
+              <i data-lucide="map-pin" class="w-4 h-4 text-indigo-600 dark:text-indigo-400"></i>
+              <span id="hero-location"></span>
+            </span>
+            <a id="hero-linkedin-link" target="_blank" rel="noopener noreferrer" class="flex items-center gap-1.5 hover:text-indigo-600 dark:hover:text-indigo-300 transition-colors">
+              <i data-lucide="linkedin" class="w-4 h-4 text-indigo-600 dark:text-indigo-400"></i>
+              LinkedIn
+            </a>
+            <a id="hero-email-link" class="flex items-center gap-1.5 hover:text-indigo-600 dark:hover:text-indigo-300 transition-colors">
+              <i data-lucide="mail" class="w-4 h-4 text-indigo-600 dark:text-indigo-400"></i>
+              <span id="hero-email"></span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Terminal Showcase with Switchable Tabs -->
+        <div class="lg:col-span-5">
+          <div class="rounded-xl border border-slate-800 bg-[#0d121f] text-gray-200 shadow-2xl overflow-hidden font-mono text-xs hover:border-indigo-500/50 transition-all duration-300 animate-float-slow relative">
+            <div class="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-indigo-400 to-transparent opacity-40 animate-scanline pointer-events-none"></div>
+
+            <div class="bg-[#151c2d] px-4 py-2.5 border-b border-gray-800 flex items-center justify-between">
+              <div class="flex items-center gap-2">
+                <span class="w-3 h-3 rounded-full bg-red-500/80 inline-block"></span>
+                <span class="w-3 h-3 rounded-full bg-yellow-500/80 inline-block"></span>
+                <span class="w-3 h-3 rounded-full bg-green-500/80 inline-block"></span>
+                
+                <div id="terminal-tabs" class="flex items-center ml-2 space-x-1 text-[11px]">
+                  <button data-tab="telemetry" class="cli-tab px-2 py-0.5 rounded transition-colors bg-indigo-600 text-white font-medium">telemetry.sh</button>
+                  <button data-tab="lambda" class="cli-tab px-2 py-0.5 rounded transition-colors text-gray-400 hover:text-white">aws-lambda.ts</button>
+                  <button data-tab="database" class="cli-tab px-2 py-0.5 rounded transition-colors text-gray-400 hover:text-white">postgresql.sql</button>
+                </div>
+              </div>
+              <span class="text-indigo-400 text-[10px] hidden sm:inline font-bold">LIVE</span>
+            </div>
+
+            <div class="p-5 text-gray-300 space-y-2 font-mono text-[11px] min-h-[220px] leading-relaxed">
+              <div id="terminal-output" class="space-y-2"></div>
+
+              <div class="mt-4 pt-3 border-t border-gray-800/80 space-y-1.5 text-gray-400">
+                <div class="flex justify-between">
+                  <span>Primary Runtimes:</span>
+                  <span class="text-indigo-300">Node.js • React • Laravel</span>
+                </div>
+                <div class="flex justify-between">
+                  <span>Databases:</span>
+                  <span class="text-indigo-300">PostgreSQL • MySQL</span>
+                </div>
+                <div class="flex justify-between">
+                  <span>Observability:</span>
+                  <span class="text-indigo-300">Datadog APM • Session Replay</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. ABOUT ME -->
+    <section id="about" class="scroll-mt-20 py-20 border-b border-slate-200 dark:border-gray-800/60 bg-slate-100/50 dark:bg-[#080d17]/50 reveal-item">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-3xl mb-12">
+          <h2 class="text-xs font-mono font-semibold text-indigo-600 dark:text-indigo-400 tracking-wider uppercase mb-2">01. Overview</h2>
+          <h3 class="text-3xl font-bold text-slate-900 dark:text-white tracking-tight">Full Stack Engineering Focused on Architecture & Reliability</h3>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-10 items-start">
+          <div id="about-text" class="md:col-span-7 space-y-4 text-slate-700 dark:text-gray-300 leading-relaxed text-base"></div>
+          <div id="about-metrics" class="md:col-span-5 grid grid-cols-2 gap-4"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. TECHNICAL SKILLS -->
+    <section id="skills" class="scroll-mt-20 py-20 border-b border-slate-200 dark:border-gray-800/60 reveal-item">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-6">
+          <div>
+            <h2 class="text-xs font-mono font-semibold text-indigo-600 dark:text-indigo-400 tracking-wider uppercase mb-2">02. Capabilities</h2>
+            <h3 class="text-3xl font-bold text-slate-900 dark:text-white tracking-tight">Technical Stack & Competencies</h3>
+            <p class="text-slate-600 dark:text-gray-400 mt-2">Categorized directly from verifiable production and academic credentials.</p>
+          </div>
+
+          <div id="skills-filter-container" class="flex flex-wrap gap-1.5 p-1 bg-slate-200/80 dark:bg-gray-900/80 border border-slate-300 dark:border-gray-800 rounded-xl"></div>
+        </div>
+
+        <div id="skills-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+      </div>
+    </section>
+
+    <!-- 4. PROFESSIONAL EXPERIENCE -->
+    <section id="experience" class="scroll-mt-20 py-20 border-b border-slate-200 dark:border-gray-800/60 bg-slate-100/40 dark:bg-[#080d17]/40 reveal-item">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-3xl mb-12">
+          <h2 className="text-xs font-mono font-semibold text-indigo-600 dark:text-indigo-400 tracking-wider uppercase mb-2">03. Career Timeline</h2>
+          <h3 class="text-3xl font-bold text-slate-900 dark:text-white tracking-tight">Work Experience</h3>
+        </div>
+
+        <div id="experience-container" class="space-y-12"></div>
+      </div>
+    </section>
+
+    <!-- 5. FEATURED PROJECTS -->
+    <section id="projects" class="scroll-mt-20 py-20 border-b border-slate-200 dark:border-gray-800/60 reveal-item">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-3xl mb-12">
+          <h2 class="text-xs font-mono font-semibold text-indigo-600 dark:text-indigo-400 tracking-wider uppercase mb-2">04. Selected Work</h2>
+          <h3 class="text-3xl font-bold text-slate-900 dark:text-white tracking-tight">Featured Projects & Systems</h3>
+          <p class="text-slate-600 dark:text-gray-400 mt-2">Core production applications and client platforms developed during professional roles.</p>
+        </div>
+
+        <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 gap-8"></div>
+      </div>
+    </section>
+
+    <!-- 6. ARCHITECTURE SHOWCASE -->
+    <section id="architecture" class="scroll-mt-20 py-20 border-b border-slate-200 dark:border-gray-800/60 bg-slate-100/50 dark:bg-[#080d17]/50 reveal-item">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-3xl mb-12">
+          <h2 class="text-xs font-mono font-semibold text-indigo-600 dark:text-indigo-400 tracking-wider uppercase mb-2">05. System Topology</h2>
+          <h3 class="text-3xl font-bold text-slate-900 dark:text-white tracking-tight">Full Stack Production Architecture Flow</h3>
+          <p class="text-slate-600 dark:text-gray-400 mt-2">Dynamic runtime topology visualizing automated signal transfer across system tiers.</p>
+        </div>
+
+        <div class="glass-panel p-6 sm:p-10 rounded-2xl space-y-8 relative overflow-hidden">
+          <div class="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-indigo-500 to-transparent animate-beam-x pointer-events-none"></div>
+          <div id="architecture-tiers-container" class="grid grid-cols-1 md:grid-cols-5 gap-4 text-xs font-mono"></div>
+
+          <div class="text-xs text-slate-500 dark:text-gray-400 font-mono border-t border-slate-200 dark:border-gray-800 pt-4 flex flex-wrap items-center justify-between gap-4">
+            <span>* Pipeline nodes update automatically or via click inspection.</span>
+            <span class="text-indigo-600 dark:text-indigo-400">CI/CD & Source: Git &bull; GitHub &bull; Bitbucket</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. EDUCATION & HONORS -->
+    <section id="education" class="scroll-mt-20 py-20 border-b border-slate-200 dark:border-gray-800/60 reveal-item">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-3xl mb-12">
+          <h2 class="text-xs font-mono font-semibold text-indigo-600 dark:text-indigo-400 tracking-wider uppercase mb-2">06. Background</h2>
+          <h3 class="text-3xl font-bold text-slate-900 dark:text-white tracking-tight">Education & Honors</h3>
+        </div>
+
+        <div id="education-grid" class="grid grid-cols-1 md:grid-cols-2 gap-8"></div>
+      </div>
+    </section>
+
+    <!-- 8. RESUME SECTION -->
+    <section id="resume" class="scroll-mt-20 py-20 border-b border-slate-200 dark:border-gray-800/60 bg-slate-100/50 dark:bg-[#080d17]/50 text-center reveal-item">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+        <h2 class="text-xs font-mono font-semibold text-indigo-600 dark:text-indigo-400 tracking-wider uppercase">07. Curriculum Vitae</h2>
+        <h3 class="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white">Interested in the full story?</h3>
+        <p class="text-slate-600 dark:text-gray-300 max-w-xl mx-auto text-base">
+          Review verified details regarding software development, database engineering, cloud implementations, and contact references.
+        </p>
+
+        <div class="flex flex-wrap items-center justify-center gap-4 pt-4">
+          <a
+            id="download-resume-btn"
+            download="Patrick_Laurence_Espena_Resume.pdf"
+            class="px-6 py-3 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-semibold text-sm transition-all duration-200 flex items-center gap-2 shadow-lg shadow-indigo-600/30 hover:scale-105 active:scale-95 cursor-pointer"
+          >
+            <i data-lucide="download" class="w-4 h-4"></i>
+            Download Resume (PDF)
+          </a>
+          <button
+            id="open-resume-btn-section"
+            class="px-6 py-3 rounded-xl border border-slate-300 dark:border-gray-700 hover:border-indigo-500 bg-white dark:bg-gray-900/80 text-slate-800 dark:text-white font-semibold text-sm transition-all duration-200 flex items-center gap-2 cursor-pointer shadow-sm hover:scale-105 active:scale-95"
+          >
+            <i data-lucide="file-text" class="w-4 h-4 text-indigo-600 dark:text-indigo-400"></i>
+            View Resume in Browser
+          </button>
+        </div>
+
+        <div class="mt-12 pt-8 border-t border-slate-200 dark:border-gray-800/80 text-left">
+          <h4 class="text-xs font-mono text-slate-500 dark:text-gray-400 uppercase tracking-wider mb-4 text-center">
+            Verified Professional References
+          </h4>
+          <div id="references-grid" class="grid grid-cols-1 md:grid-cols-3 gap-4"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9. CONTACT SECTION -->
+    <section id="contact" class="scroll-mt-20 py-20 border-b border-slate-200 dark:border-gray-800/60 reveal-item">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+          <div class="lg:col-span-5 space-y-6">
+            <div>
+              <h2 class="text-xs font-mono font-semibold text-indigo-600 dark:text-indigo-400 tracking-wider uppercase mb-2">08. Inquiries</h2>
+              <h3 class="text-3xl font-bold text-slate-900 dark:text-white tracking-tight">Let's Connect</h3>
+            </div>
+            <p class="text-slate-600 dark:text-gray-300 text-sm leading-relaxed">
+              I am open to full stack software development roles, platform engineering, and technical collaborations. Reach out directly via email, phone, or LinkedIn.
+            </p>
+
+            <div class="space-y-3 font-mono text-xs text-slate-700 dark:text-gray-300">
+              <div class="p-3 rounded-lg bg-white dark:bg-gray-900 border border-slate-200 dark:border-gray-800 flex items-center gap-3 hover:border-indigo-500/40 transition-colors shadow-2xs">
+                <i data-lucide="mail" class="w-4 h-4 text-indigo-600 dark:text-indigo-400"></i>
+                <span id="contact-email"></span>
+              </div>
+              <div class="p-3 rounded-lg bg-white dark:bg-gray-900 border border-slate-200 dark:border-gray-800 flex items-center gap-3 hover:border-indigo-500/40 transition-colors shadow-2xs">
+                <i data-lucide="phone" class="w-4 h-4 text-indigo-600 dark:text-indigo-400"></i>
+                <span id="contact-phone"></span>
+              </div>
+              <div class="p-3 rounded-lg bg-white dark:bg-gray-900 border border-slate-200 dark:border-gray-800 flex items-center gap-3 hover:border-indigo-500/40 transition-colors shadow-2xs">
+                <i data-lucide="map-pin" class="w-4 h-4 text-indigo-600 dark:text-indigo-400"></i>
+                <span id="contact-location"></span>
+              </div>
+              <a
+                id="contact-linkedin"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="p-3 rounded-lg bg-white dark:bg-gray-900 border border-slate-200 dark:border-gray-800 flex items-center gap-3 text-indigo-600 dark:text-indigo-400 hover:text-indigo-500 hover:border-indigo-500/40 transition-colors cursor-pointer shadow-2xs"
+              >
+                <i data-lucide="linkedin" class="w-4 h-4"></i>
+                <span id="contact-linkedin-display"></span>
+              </a>
+            </div>
+          </div>
+
+          <div class="lg:col-span-7">
+            <form id="contact-form" method="GET" class="glass-panel p-6 sm:p-8 rounded-2xl space-y-4 shadow-xl">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-xs font-mono text-slate-600 dark:text-gray-400 mb-1" for="name">Your Name</label>
+                  <input type="text" id="name" name="subject" required placeholder="Alex Mercer" class="w-full px-3.5 py-2.5 rounded-lg bg-white dark:bg-[#0a0f1d] border border-slate-300 dark:border-gray-800 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-gray-600 focus:outline-none focus:border-indigo-500 text-sm transition-colors" />
+                </div>
+                <div>
+                  <label class="block text-xs font-mono text-slate-600 dark:text-gray-400 mb-1" for="email">Your Email</label>
+                  <input type="email" id="email" required placeholder="alex@company.com" class="w-full px-3.5 py-2.5 rounded-lg bg-white dark:bg-[#0a0f1d] border border-slate-300 dark:border-gray-800 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-gray-600 focus:outline-none focus:border-indigo-500 text-sm transition-colors" />
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-xs font-mono text-slate-600 dark:text-gray-400 mb-1" for="message">Message</label>
+                <textarea id="message" name="body" rows="4" required placeholder="Briefly state your inquiry, project scope, or opportunity..." class="w-full px-3.5 py-2.5 rounded-lg bg-white dark:bg-[#0a0f1d] border border-slate-300 dark:border-gray-800 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-gray-600 focus:outline-none focus:border-indigo-500 text-sm transition-colors"></textarea>
+              </div>
+
+              <button type="submit" class="w-full py-3 rounded-lg bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-semibold text-sm transition-all shadow-md shadow-indigo-600/30 flex items-center justify-center gap-2 cursor-pointer hover:scale-[1.01] active:scale-[0.99]">
+                <i data-lucide="send" class="w-4 h-4"></i>
+                Send Message (Opens Mail Client)
+              </button>
+              <p class="text-[11px] font-mono text-slate-500 dark:text-gray-500 text-center">
+                Static site configured with direct client mail protocol fallback.
+              </p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- MODAL: Case Study -->
+  <div id="case-study-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-md overflow-y-auto">
+    <div class="modal-backdrop fixed inset-0"></div>
+    <div class="bg-white dark:bg-[#0b0f19] border border-slate-200 dark:border-gray-800 rounded-2xl max-w-3xl w-full p-6 sm:p-8 space-y-6 relative my-8 z-10 animate-in fade-in zoom-in-95 duration-200 shadow-2xl">
+      <button id="close-case-study-btn" class="absolute top-5 right-5 text-slate-500 hover:text-slate-800 dark:text-gray-400 dark:hover:text-white p-1 cursor-pointer transition-colors" aria-label="Close case study">
+        <i data-lucide="x" class="w-6 h-6"></i>
+      </button>
+
+      <div>
+        <span class="text-xs font-mono text-indigo-600 dark:text-indigo-400 uppercase tracking-wider">Deep Dive Architecture</span>
+        <h3 class="text-2xl font-bold text-slate-900 dark:text-white mt-1">Case Study: Terra Education Portal & CMS</h3>
+      </div>
+
+      <div class="space-y-4 text-sm text-slate-600 dark:text-gray-300 leading-relaxed border-t border-slate-200 dark:border-gray-800 pt-4">
+        <div>
+          <h4 class="font-semibold text-slate-900 dark:text-white font-mono text-sm mb-1">Problem & Context:</h4>
+          <p>Managing extensive education workflows required dynamic web forms, reliable database querying, synchronizing records with Salesforce, and troubleshooting client data across varied spreadsheets.</p>
+        </div>
+
+        <div>
+          <h4 class="font-semibold text-slate-900 dark:text-white font-mono text-sm mb-1">Architecture & Solution:</h4>
+          <p>Constructed PERN applications using React.js frontend structures, Node.js backend logic, and PostgreSQL database operations. Introduced AWS Lambda serverless functions to automate backend event handling and integrated Typeform API for responsive dynamic form submission pipelines.</p>
+        </div>
+
+        <div>
+          <h4 class="font-semibold text-slate-900 dark:text-white font-mono text-sm mb-1">Observability & Error Resolution:</h4>
+          <p>Integrated Datadog API for performance monitoring, error tracking, and Session Replay to accurately capture user friction points. Automated incident tickets directly into Jira for rapid triage, while utilizing Slack for real-time team coordination.</p>
+        </div>
+
+        <div>
+          <h4 class="font-semibold text-slate-900 dark:text-white font-mono text-sm mb-1">Data Realignment & Management:</h4>
+          <p>Addressed and reconciled client-provided spreadsheet records with customer databases, resolving discrepancies in payment statuses and Salesforce synchronization.</p>
+        </div>
+
+        <div class="pt-2">
+          <span class="font-semibold text-slate-900 dark:text-white font-mono text-sm block mb-1">Technologies Employed:</span>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-2 py-1 bg-slate-100 dark:bg-gray-800 text-xs font-mono text-indigo-700 dark:text-indigo-300 rounded border border-slate-300 dark:border-gray-700">React.js</span>
+            <span class="px-2 py-1 bg-slate-100 dark:bg-gray-800 text-xs font-mono text-indigo-700 dark:text-indigo-300 rounded border border-slate-300 dark:border-gray-700">Node.js</span>
+            <span class="px-2 py-1 bg-slate-100 dark:bg-gray-800 text-xs font-mono text-indigo-700 dark:text-indigo-300 rounded border border-slate-300 dark:border-gray-700">PostgreSQL</span>
+            <span class="px-2 py-1 bg-slate-100 dark:bg-gray-800 text-xs font-mono text-indigo-700 dark:text-indigo-300 rounded border border-slate-300 dark:border-gray-700">AWS Lambda</span>
+            <span class="px-2 py-1 bg-slate-100 dark:bg-gray-800 text-xs font-mono text-indigo-700 dark:text-indigo-300 rounded border border-slate-300 dark:border-gray-700">Datadog API</span>
+            <span class="px-2 py-1 bg-slate-100 dark:bg-gray-800 text-xs font-mono text-indigo-700 dark:text-indigo-300 rounded border border-slate-300 dark:border-gray-700">Typeform API</span>
+            <span class="px-2 py-1 bg-slate-100 dark:bg-gray-800 text-xs font-mono text-indigo-700 dark:text-indigo-300 rounded border border-slate-300 dark:border-gray-700">Jira API</span>
+            <span class="px-2 py-1 bg-slate-100 dark:bg-gray-800 text-xs font-mono text-indigo-700 dark:text-indigo-300 rounded border border-slate-300 dark:border-gray-700">Salesforce</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="border-t border-slate-200 dark:border-gray-800 pt-4 flex justify-end">
+        <button id="close-case-study-bottom-btn" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white rounded-lg text-sm font-medium cursor-pointer transition-colors">
+          Close Overview
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: Resume Viewer -->
+  <div id="resume-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/75 backdrop-blur-md overflow-hidden">
+    <div class="modal-backdrop fixed inset-0"></div>
+
+    <div class="bg-white dark:bg-[#0b0f19] border border-slate-200 dark:border-gray-800 rounded-2xl max-w-4xl w-full max-h-[92vh] flex flex-col overflow-hidden shadow-2xl relative z-10 animate-in fade-in zoom-in-95 duration-200">
+      <div class="px-6 py-4 border-b border-slate-200 dark:border-gray-800/80 flex items-center justify-between bg-slate-100/80 dark:bg-[#111827]/80 backdrop-blur-sm">
+        <div class="flex items-center gap-3">
+          <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+          <div class="flex items-center gap-2">
+            <span id="modal-resume-name" class="font-mono text-sm font-semibold text-slate-900 dark:text-white"></span>
+            <span class="text-slate-400 dark:text-gray-500 text-xs hidden sm:inline">&bull;</span>
+            <span class="text-indigo-600 dark:text-indigo-400 font-mono text-xs hidden sm:inline">Résumé Document</span>
+          </div>
+        </div>
+        <div class="flex items-center gap-2.5">
+          <a
+            id="modal-resume-download"
+            download="Patrick_Laurence_Espena_Resume.pdf"
+            class="px-3.5 py-1.5 text-xs font-mono font-medium rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white flex items-center gap-1.5 transition-all shadow-xs"
+          >
+            <i data-lucide="download" class="w-3.5 h-3.5"></i>
+            <span>Download PDF</span>
+          </a>
+          <button id="close-resume-modal-btn" class="text-slate-500 hover:text-slate-800 dark:text-gray-400 dark:hover:text-white p-1.5 rounded-lg hover:bg-slate-200 dark:hover:bg-gray-800 transition-colors cursor-pointer" aria-label="Close modal">
+            <i data-lucide="x" class="w-5 h-5"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="p-6 sm:p-10 overflow-y-auto custom-scrollbar space-y-8 bg-slate-50/50 dark:bg-[#090d18]/60 text-sm">
+        <div class="border-b border-slate-200 dark:border-gray-800 pb-6 flex flex-col md:flex-row md:items-end justify-between gap-4">
+          <div>
+            <h2 id="modal-doc-name" class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight"></h2>
+            <p id="modal-doc-title" class="text-indigo-600 dark:text-indigo-400 font-mono text-sm font-medium mt-1"></p>
+          </div>
+          <div class="font-mono text-xs text-slate-500 dark:text-gray-400 space-y-1 md:text-right">
+            <div class="flex md:justify-end items-center gap-2">
+              <i data-lucide="mail" class="w-3.5 h-3.5 text-indigo-600 dark:text-indigo-400"></i>
+              <span id="modal-doc-email"></span>
+            </div>
+            <div class="flex md:justify-end items-center gap-2">
+              <i data-lucide="phone" class="w-3.5 h-3.5 text-indigo-600 dark:text-indigo-400"></i>
+              <span id="modal-doc-phone"></span>
+            </div>
+            <div class="flex md:justify-end items-center gap-2">
+              <i data-lucide="map-pin" class="w-3.5 h-3.5 text-indigo-600 dark:text-indigo-400"></i>
+              <span id="modal-doc-location"></span>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="flex items-center gap-2 mb-3">
+            <i data-lucide="cpu" class="w-4 h-4 text-indigo-600 dark:text-indigo-400"></i>
+            <h3 class="text-xs font-mono font-bold text-slate-900 dark:text-gray-200 uppercase tracking-widest">Skills Summary</h3>
+          </div>
+          <div id="modal-skills-grid" class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs"></div>
+        </div>
+
+        <div>
+          <div class="flex items-center gap-2 mb-4">
+            <i data-lucide="briefcase" class="w-4 h-4 text-indigo-600 dark:text-indigo-400"></i>
+            <h3 class="text-xs font-mono font-bold text-slate-900 dark:text-gray-200 uppercase tracking-widest">Work Experience</h3>
+          </div>
+          <div id="modal-experience-container" class="space-y-6"></div>
+        </div>
+
+        <div>
+          <div class="flex items-center gap-2 mb-3">
+            <i data-lucide="graduation-cap" class="w-4 h-4 text-indigo-600 dark:text-indigo-400"></i>
+            <h3 class="text-xs font-mono font-bold text-slate-900 dark:text-gray-200 uppercase tracking-widest">Education</h3>
+          </div>
+          <div id="modal-education-container" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+        </div>
+
+        <div>
+          <div class="flex items-center gap-2 mb-3">
+            <i data-lucide="users" class="w-4 h-4 text-indigo-600 dark:text-indigo-400"></i>
+            <h3 class="text-xs font-mono font-bold text-slate-900 dark:text-gray-200 uppercase tracking-widest">References</h3>
+          </div>
+          <div id="modal-references-container" class="grid grid-cols-1 sm:grid-cols-3 gap-3"></div>
+        </div>
+      </div>
+
+      <div class="px-6 py-3.5 border-t border-slate-200 dark:border-gray-800/80 bg-slate-100/80 dark:bg-[#111827]/70 flex items-center justify-between text-xs font-mono text-slate-500 dark:text-gray-400">
+        <span class="truncate">Document verified against resume records</span>
+        <button id="close-resume-bottom-btn" class="px-4 py-1.5 rounded-lg bg-slate-200 dark:bg-gray-800 hover:bg-slate-300 dark:hover:bg-gray-700 text-slate-800 dark:text-gray-200 transition-colors cursor-pointer">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="py-8 bg-slate-100 dark:bg-[#04060a] border-t border-slate-200 dark:border-gray-900 text-xs font-mono text-slate-500 dark:text-gray-400 relative z-10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div>
+        <span id="footer-name" class="text-slate-900 dark:text-white font-semibold"></span> &bull; <span id="footer-title"></span>
+      </div>
+      <div class="flex items-center gap-6">
+        <a id="footer-linkedin" target="_blank" rel="noopener noreferrer" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">LinkedIn</a>
+        <a id="footer-email" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Email</a>
+      </div>
+      <div>
+        &copy; 2026 Patrick Laurence J. Espeña. All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+  <!-- External Dynamic Application Scripts -->
+  <script src="index.js"></script>
+</body>
+</html>
