@@ -1,6 +1,6 @@
 /**
  * Patrick Laurence J. Espeña - Portfolio Engine
- * Object-Oriented Architecture (OOP)
+ * Production Mobile & Desktop Compatible Build
  */
 
 // 1. Data Store Model
@@ -18,7 +18,8 @@ class PortfolioModel {
       github: "https://github.com",
       resumeFileName: "Espeña, Patrick Laurence Resume.pdf",
       aboutParagraphs: [
-        "I am a Full Stack Web Developer experienced in engineering end-to-end web applications across modern JavaScript and PHP ecosystems. At Meijun LLC, I worked on the Terra Education Portal & CMS, developing both frontend interfaces with React.js and robust backend services with Node.js and PostgreSQL.",
+        "I am a Full Stack Web Developer experienced in engineering end-to-end web applications across modern JavaScript and PHP ecosystems.",
+        "At Meijun LLC, I worked on the Terra Education Portal & CMS, developing both frontend interfaces with React.js and robust backend services with Node.js and PostgreSQL.",
         "My experience spans serverless automation with AWS Lambda, enterprise observability through Datadog API and Session Replay, and automated issue tracking with Jira API. Additionally, I manage relational databases—designing and optimizing schemas in PostgreSQL and MySQL—and interface with third-party platforms such as Typeform and Salesforce to align customer records and transaction states.",
         "My software foundation is complemented by a Computer Engineering degree (Cum Laude, Best Thesis Award) and Mechatronics training, reinforcing disciplined troubleshooting, system architecture, and performance-focused coding."
       ],
@@ -282,22 +283,20 @@ class ParticleNetwork {
     this.resize();
     window.addEventListener("resize", () => this.resize());
     
-    // Only bind mouse tracker on non-touch devices to avoid layout jitter
-    if (window.matchMedia("(pointer: fine)").matches) {
-      window.addEventListener("mousemove", (e) => {
-        this.mouse.x = e.clientX;
-        this.mouse.y = e.clientY;
-      });
-    }
+    window.addEventListener("mousemove", (e) => {
+      this.mouse.x = e.clientX;
+      this.mouse.y = e.clientY;
+    });
 
-    const count = Math.min(window.innerWidth > 768 ? 40 : 18, 45);
+    const isMobile = window.innerWidth <= 768;
+    const count = isMobile ? 18 : 40;
     this.particles = [];
     for (let i = 0; i < count; i++) {
       this.particles.push({
         x: Math.random() * this.width,
         y: Math.random() * this.height,
-        vx: (Math.random() - 0.5) * 0.35,
-        vy: (Math.random() - 0.5) * 0.35,
+        vx: (Math.random() - 0.5) * (isMobile ? 0.2 : 0.35),
+        vy: (Math.random() - 0.5) * (isMobile ? 0.2 : 0.35),
         radius: Math.random() * 1.5 + 0.8
       });
     }
@@ -311,6 +310,7 @@ class ParticleNetwork {
   }
 
   animate() {
+    if (!this.ctx) return;
     this.ctx.clearRect(0, 0, this.width, this.height);
     const isDark = document.documentElement.classList.contains("dark");
 
@@ -345,7 +345,7 @@ class ParticleNetwork {
         }
       }
 
-      if (window.matchMedia("(pointer: fine)").matches) {
+      if (this.mouse.x > 0 && this.mouse.y > 0) {
         const mdx = p1.x - this.mouse.x;
         const mdy = p1.y - this.mouse.y;
         const mdist = Math.sqrt(mdx * mdx + mdy * mdy);
@@ -395,7 +395,7 @@ class PortfolioView {
   }
 
   refreshIcons() {
-    if (window.lucide) {
+    if (window.lucide && typeof window.lucide.createIcons === 'function') {
       window.lucide.createIcons();
     }
   }
@@ -439,14 +439,23 @@ class PortfolioView {
 
   renderHero() {
     const { personal } = this.model;
-    document.getElementById("hero-name").textContent = personal.name;
-    document.getElementById("hero-title").textContent = personal.title;
-    document.getElementById("hero-headline").textContent = personal.headline;
-    document.getElementById("hero-location").textContent = personal.location;
-    document.getElementById("hero-email").textContent = personal.email;
-    document.getElementById("hero-email-link").href = `mailto:${personal.email}`;
-    document.getElementById("hero-linkedin-link").href = personal.linkedin;
-    document.getElementById("download-resume-btn").href = encodeURI(personal.resumeFileName);
+    const nameEl = document.getElementById("hero-name");
+    const titleEl = document.getElementById("hero-title");
+    const headlineEl = document.getElementById("hero-headline");
+    const locationEl = document.getElementById("hero-location");
+    const emailEl = document.getElementById("hero-email");
+    const emailLinkEl = document.getElementById("hero-email-link");
+    const linkedinEl = document.getElementById("hero-linkedin-link");
+    const dlBtn = document.getElementById("download-resume-btn");
+
+    if (nameEl) nameEl.textContent = personal.name;
+    if (titleEl) titleEl.textContent = personal.title;
+    if (headlineEl) headlineEl.textContent = personal.headline;
+    if (locationEl) locationEl.textContent = personal.location;
+    if (emailEl) emailEl.textContent = personal.email;
+    if (emailLinkEl) emailLinkEl.href = `mailto:${personal.email}`;
+    if (linkedinEl) linkedinEl.href = personal.linkedin;
+    if (dlBtn) dlBtn.href = encodeURI(personal.resumeFileName);
   }
 
   renderAbout() {
@@ -693,28 +702,48 @@ class PortfolioView {
 
   renderContact() {
     const { personal } = this.model;
-    document.getElementById("contact-email").textContent = personal.email;
-    document.getElementById("contact-phone").textContent = personal.phone;
-    document.getElementById("contact-location").textContent = personal.location;
-    document.getElementById("contact-linkedin").href = personal.linkedin;
-    document.getElementById("contact-linkedin-display").textContent = personal.linkedinDisplay;
-    document.getElementById("contact-form").action = `mailto:${personal.email}`;
+    const emailEl = document.getElementById("contact-email");
+    const phoneEl = document.getElementById("contact-phone");
+    const locEl = document.getElementById("contact-location");
+    const liEl = document.getElementById("contact-linkedin");
+    const liDispEl = document.getElementById("contact-linkedin-display");
+    const formEl = document.getElementById("contact-form");
 
-    document.getElementById("footer-name").textContent = personal.name;
-    document.getElementById("footer-title").textContent = personal.title;
-    document.getElementById("footer-linkedin").href = personal.linkedin;
-    document.getElementById("footer-email").href = `mailto:${personal.email}`;
+    if (emailEl) emailEl.textContent = personal.email;
+    if (phoneEl) phoneEl.textContent = personal.phone;
+    if (locEl) locEl.textContent = personal.location;
+    if (liEl) liEl.href = personal.linkedin;
+    if (liDispEl) liDispEl.textContent = personal.linkedinDisplay;
+    if (formEl) formEl.action = `mailto:${personal.email}`;
+
+    const footName = document.getElementById("footer-name");
+    const footTitle = document.getElementById("footer-title");
+    const footLi = document.getElementById("footer-linkedin");
+    const footEmail = document.getElementById("footer-email");
+
+    if (footName) footName.textContent = personal.name;
+    if (footTitle) footTitle.textContent = personal.title;
+    if (footLi) footLi.href = personal.linkedin;
+    if (footEmail) footEmail.href = `mailto:${personal.email}`;
   }
 
   renderResumeModal() {
     const { personal, skills, experiences, education, references } = this.model;
-    document.getElementById("modal-resume-name").textContent = personal.name;
-    document.getElementById("modal-doc-name").textContent = personal.name;
-    document.getElementById("modal-doc-title").textContent = personal.title;
-    document.getElementById("modal-doc-email").textContent = personal.email;
-    document.getElementById("modal-doc-phone").textContent = personal.phone;
-    document.getElementById("modal-doc-location").textContent = personal.location;
-    document.getElementById("modal-resume-download").href = encodeURI(personal.resumeFileName);
+    const resName = document.getElementById("modal-resume-name");
+    const docName = document.getElementById("modal-doc-name");
+    const docTitle = document.getElementById("modal-doc-title");
+    const docEmail = document.getElementById("modal-doc-email");
+    const docPhone = document.getElementById("modal-doc-phone");
+    const docLoc = document.getElementById("modal-doc-location");
+    const resDl = document.getElementById("modal-resume-download");
+
+    if (resName) resName.textContent = personal.name;
+    if (docName) docName.textContent = personal.name;
+    if (docTitle) docTitle.textContent = personal.title;
+    if (docEmail) docEmail.textContent = personal.email;
+    if (docPhone) docPhone.textContent = personal.phone;
+    if (docLoc) docLoc.textContent = personal.location;
+    if (resDl) resDl.href = encodeURI(personal.resumeFileName);
 
     const skillsContainer = document.getElementById("modal-skills-grid");
     if (skillsContainer) {
@@ -735,7 +764,7 @@ class PortfolioView {
           <div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1">
             <div>
               <span class="font-bold text-slate-900 dark:text-white text-sm sm:text-base">${exp.role}</span>
-              <span class="text-slate-500 dark:text-gray-400 text-xs sm:ml-2">| ${exp.company}, {exp.location}</span>
+              <span class="text-slate-500 dark:text-gray-400 text-xs sm:ml-2">| ${exp.company}, ${exp.location}</span>
             </div>
             <span class="font-mono text-xs text-indigo-600 dark:text-indigo-400 font-medium">${exp.period}</span>
           </div>
@@ -868,7 +897,6 @@ class AppController {
   }
 
   bindEvents() {
-    // Theme Toggle
     const themeBtn = document.getElementById("theme-toggle-btn");
     const themeBtnMobile = document.getElementById("theme-toggle-mobile");
     const toggleHandler = () => {
@@ -878,7 +906,6 @@ class AppController {
     if (themeBtn) themeBtn.addEventListener("click", toggleHandler);
     if (themeBtnMobile) themeBtnMobile.addEventListener("click", toggleHandler);
 
-    // Mobile Navigation Drawer Toggle
     const mobileMenuBtn = document.getElementById("mobile-menu-toggle");
     const mobileMenu = document.getElementById("mobile-menu");
     if (mobileMenuBtn && mobileMenu) {
@@ -887,7 +914,6 @@ class AppController {
       });
     }
 
-    // Smooth Scroll Navigation Links
     document.addEventListener("click", (e) => {
       const link = e.target.closest(".nav-link");
       if (link) {
@@ -909,7 +935,6 @@ class AppController {
       }
     });
 
-    // Terminal Tabs Switcher
     const tabsContainer = document.getElementById("terminal-tabs");
     if (tabsContainer) {
       tabsContainer.addEventListener("click", (e) => {
@@ -925,7 +950,6 @@ class AppController {
       });
     }
 
-    // Skills Category Filter Buttons
     const filterContainer = document.getElementById("skills-filter-container");
     if (filterContainer) {
       filterContainer.addEventListener("click", (e) => {
@@ -939,7 +963,6 @@ class AppController {
       });
     }
 
-    // Architecture Tier Click Inspection
     const archContainer = document.getElementById("architecture-tiers-container");
     if (archContainer) {
       archContainer.addEventListener("click", (e) => {
@@ -951,7 +974,6 @@ class AppController {
       });
     }
 
-    // Modal Triggers: Case Study
     const openCaseStudy = () => {
       document.getElementById("case-study-modal").classList.remove("hidden");
       document.body.style.overflow = "hidden";
@@ -968,7 +990,6 @@ class AppController {
       }
     });
 
-    // Modal Triggers: Resume
     const openResume = () => {
       document.getElementById("resume-modal").classList.remove("hidden");
       document.body.style.overflow = "hidden";
@@ -993,9 +1014,15 @@ class AppController {
           entry.target.classList.add("is-visible");
         }
       });
-    }, { threshold: 0.1 });
+    }, { threshold: 0.05 });
 
-    document.querySelectorAll(".reveal-item").forEach(el => observer.observe(el));
+    const items = document.querySelectorAll(".reveal-item");
+    items.forEach(el => observer.observe(el));
+
+    // Mobile fallback: ensure elements become visible if observer is slow
+    setTimeout(() => {
+      items.forEach(el => el.classList.add("is-visible"));
+    }, 400);
   }
 
   initScrollProgress() {
@@ -1021,7 +1048,16 @@ class AppController {
   }
 }
 
-// Instantiate and Mount on DOM Ready
-document.addEventListener("DOMContentLoaded", () => {
-  window.app = new AppController();
-});
+// 5. Robust Bootstrap for Mobile and Desktop
+function startApp() {
+  if (!window.__appInitialized) {
+    window.__appInitialized = true;
+    window.app = new AppController();
+  }
+}
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", startApp);
+} else {
+  startApp();
+}
