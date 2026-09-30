@@ -10,102 +10,102 @@ class PortfolioModel {
       name: "Patrick Laurence J. Espeña",
       title: "Full Stack Web Developer",
       headline: "Engineering resilient web systems across the PERN & Laravel stacks, AWS serverless pipelines, and Datadog observability architectures.",
-      location: "Bulihan, Malolos, Bulacan[cite: 1]",
-      email: "patrickespena016@gmail.com[cite: 1]",
-      phone: "0949-704-5597[cite: 1]",
-      linkedin: "https://linkedin.com/in/patrick-espena-a8a17126a[cite: 1]",
-      linkedinDisplay: "linkedin.com/in/patrick-espena-a8a17126a[cite: 1]",
+      location: "Bulihan, Malolos, Bulacan",
+      email: "patrickespena016@gmail.com",
+      phone: "0949-704-5597",
+      linkedin: "https://linkedin.com/in/patrick-espena-a8a17126a",
+      linkedinDisplay: "linkedin.com/in/patrick-espena-a8a17126a",
       github: "https://github.com",
       resumeFileName: "Espeña, Patrick Laurence Resume.pdf",
       aboutParagraphs: [
-        "I am a Full Stack Web Developer experienced in engineering end-to-end web applications across modern JavaScript and PHP ecosystems[cite: 1]. At Meijun LLC, I worked on the Terra Education Portal & CMS, developing both frontend interfaces with React.js and robust backend services with Node.js and PostgreSQL[cite: 1].",
-        "My experience spans serverless automation with AWS Lambda, enterprise observability through Datadog API and Session Replay, and automated issue tracking with Jira API[cite: 1]. Additionally, I manage relational databases—designing and optimizing schemas in PostgreSQL and MySQL—and interface with third-party platforms such as Typeform and Salesforce to align customer records and transaction states[cite: 1].",
-        "My software foundation is complemented by a Computer Engineering degree (Cum Laude, Best Thesis Award) and Mechatronics training, reinforcing disciplined troubleshooting, system architecture, and performance-focused coding[cite: 1]."
+        "I am a Full Stack Web Developer experienced in engineering end-to-end web applications across modern JavaScript and PHP ecosystems. At Meijun LLC, I worked on the Terra Education Portal & CMS, developing both frontend interfaces with React.js and robust backend services with Node.js and PostgreSQL.",
+        "My experience spans serverless automation with AWS Lambda, enterprise observability through Datadog API and Session Replay, and automated issue tracking with Jira API. Additionally, I manage relational databases—designing and optimizing schemas in PostgreSQL and MySQL—and interface with third-party platforms such as Typeform and Salesforce to align customer records and transaction states.",
+        "My software foundation is complemented by a Computer Engineering degree (Cum Laude, Best Thesis Award) and Mechatronics training, reinforcing disciplined troubleshooting, system architecture, and performance-focused coding."
       ],
       metrics: [
-        { value: "Dec 2023–2026", title: "Meijun LLC (Remote)[cite: 1]", subtitle: "React, Node, PostgreSQL, AWS, Datadog[cite: 1]" },
-        { value: "Cum Laude", title: "BS Computer Eng.[cite: 1]", subtitle: "STI College & Best Thesis Award[cite: 1]" },
-        { value: "Dual Stack", title: "Production Runtimes[cite: 1]", subtitle: "PERN Stack & PHP Laravel Ecosystems[cite: 1]" },
-        { value: "packetHACKS", title: "2023 Hackathon[cite: 1]", subtitle: "Finalist: Smart Utility (IoT Conference)[cite: 1]" }
+        { value: "Dec 2023–2026", title: "Meijun LLC (Remote)", subtitle: "React, Node, PostgreSQL, AWS, Datadog" },
+        { value: "Cum Laude", title: "BS Computer Eng.", subtitle: "STI College & Best Thesis Award" },
+        { value: "Dual Stack", title: "Production Runtimes", subtitle: "PERN Stack & PHP Laravel Ecosystems" },
+        { value: "packetHACKS", title: "2023 Hackathon", subtitle: "Finalist: Smart Utility (IoT Conference)" }
       ]
     };
 
     this.skills = [
       {
         category: "Languages & Core",
-        items: ["JavaScript (ES6+)", "TypeScript", "Python", "PHP", "C++", "HTML5", "CSS3"][cite: 1]
+        items: ["JavaScript (ES6+)", "TypeScript", "Python", "PHP", "C++", "HTML5", "CSS3"]
       },
       {
         category: "Frameworks & Libraries",
-        items: ["React.js", "Node.js", "Laravel", "Django", "Livewire"][cite: 1]
+        items: ["React.js", "Node.js", "Laravel", "Django", "Livewire"]
       },
       {
         category: "Cloud & Integrations",
-        items: ["AWS Lambda", "AWS Firehose", "AWS QuickSight", "AWS Glue", "AWS Athena", "AWS CloudWatch", "AWS CloudFormation", "Typeform API", "Datadog API", "Salesforce"][cite: 1]
+        items: ["AWS Lambda", "AWS Firehose", "AWS QuickSight", "AWS Glue", "AWS Athena", "AWS CloudWatch", "AWS CloudFormation", "Typeform API", "Datadog API", "Salesforce"]
       },
       {
         category: "Databases",
-        items: ["PostgreSQL", "MySQL"][cite: 1]
+        items: ["PostgreSQL", "MySQL"]
       },
       {
         category: "Tools & Platforms",
-        items: ["Git", "GitHub", "Bitbucket", "VS Code", "Jira", "Slack", "REST APIs"][cite: 1]
+        items: ["Git", "GitHub", "Bitbucket", "VS Code", "Jira", "Slack", "REST APIs"]
       },
       {
         category: "IT & System Competencies",
-        items: ["System Troubleshooting", "Hardware Assembly & Maintenance", "Peripheral Device Setup", "Driver Installation", "Software Installations"][cite: 1]
+        items: ["System Troubleshooting", "Hardware Assembly & Maintenance", "Peripheral Device Setup", "Driver Installation", "Software Installations"]
       }
     ];
 
     this.experiences = [
       {
-        role: "Full Stack Web Developer[cite: 1]",
-        company: "Meijun LLC[cite: 1]",
-        location: "San Diego, California (Remote)[cite: 1]",
-        period: "December 2023 - July 2026[cite: 1]",
+        role: "Full Stack Web Developer",
+        company: "Meijun LLC",
+        location: "San Diego, California (Remote)",
+        period: "December 2023 - July 2026",
         subProjects: [
           {
-            title: "Terra Education (Portal & CMS)[cite: 1]",
+            title: "Terra Education (Portal & CMS)",
             highlights: [
-              "Developed and maintained full-stack web applications utilizing React.js, Node.js, and PostgreSQL (PERN stack)[cite: 1].",
-              "Built dynamic content handling and user interactions integrated with the Typeform API for dynamic form submissions[cite: 1].",
-              "Implemented AWS Lambda serverless functions to automate backend processing workflows[cite: 1].",
-              "Integrated Datadog monitoring with Jira API for automated issue tracking, and implemented Session Replay to capture user interactions for debugging and observability[cite: 1].",
-              "Integrated third-party APIs including Typeform and Datadog API for performance monitoring, error tracking, and system observability[cite: 1].",
-              "Worked with Salesforce for client data management and corrected spreadsheet data regarding customer records, payment statuses, and Salesforce alignment[cite: 1].",
-              "Managed PostgreSQL operations, schema design, and query optimization[cite: 1].",
-              "Conducted regular testing, debugging, and deployments across staging and production environments[cite: 1].",
-              "Collaborated with cross-functional teams in agile sprints, daily stand-ups, code reviews, and Jira task tracking[cite: 1]."
+              "Developed and maintained full-stack web applications utilizing React.js, Node.js, and PostgreSQL (PERN stack).",
+              "Built dynamic content handling and user interactions integrated with the Typeform API for dynamic form submissions.",
+              "Implemented AWS Lambda serverless functions to automate backend processing workflows.",
+              "Integrated Datadog monitoring with Jira API for automated issue tracking, and implemented Session Replay to capture user interactions for debugging and observability.",
+              "Integrated third-party APIs including Typeform and Datadog API for performance monitoring, error tracking, and system observability.",
+              "Worked with Salesforce for client data management and corrected spreadsheet data regarding customer records, payment statuses, and Salesforce alignment.",
+              "Managed PostgreSQL operations, schema design, and query optimization.",
+              "Conducted regular testing, debugging, and deployments across staging and production environments.",
+              "Collaborated with cross-functional teams in agile sprints, daily stand-ups, code reviews, and Jira task tracking."
             ]
           },
           {
-            title: "RCP (Rock Church Project)[cite: 1]",
-            timeline: "December 2023 - June 2024[cite: 1]",
+            title: "RCP (Rock Church Project)",
+            timeline: "December 2023 - June 2024",
             highlights: [
-              "Contributed to an existing church management web application by implementing features and frontend enhancements using PHP, Laravel, and Livewire[cite: 1].",
-              "Delivered UI improvements, system bug fixes, and collaborated on MySQL database operations[cite: 1]."
+              "Contributed to an existing church management web application by implementing features and frontend enhancements using PHP, Laravel, and Livewire.",
+              "Delivered UI improvements, system bug fixes, and collaborated on MySQL database operations."
             ]
           }
         ]
       },
       {
-        role: "Full Stack Web Developer[cite: 1]",
-        company: "Makopa Inc[cite: 1]",
-        location: "Parañaque City (Freelance - Remote)[cite: 1]",
-        period: "September 2023 - December 2023[cite: 1]",
+        role: "Full Stack Web Developer",
+        company: "Makopa Inc",
+        location: "Parañaque City (Freelance - Remote)",
+        period: "September 2023 - December 2023",
         subProjects: [
           {
-            title: "MakeItMemories[cite: 1]",
-            timeline: "November - December 2023[cite: 1]",
+            title: "MakeItMemories",
+            timeline: "November - December 2023",
             highlights: [
-              "Developed an interactive online photo gallery enabling users to upload media, share moments, and manage digital memories using PHP, Laravel, and MySQL[cite: 1]."
+              "Developed an interactive online photo gallery enabling users to upload media, share moments, and manage digital memories using PHP, Laravel, and MySQL."
             ]
           },
           {
-            title: "Salam Organization System[cite: 1]",
-            timeline: "September 2023[cite: 1]",
+            title: "Salam Organization System",
+            timeline: "September 2023",
             highlights: [
-              "Built a web platform for managing organizational activities, events, and member registrations for a non-profit organization using PHP, Laravel, and MySQL[cite: 1]."
+              "Built a web platform for managing organizational activities, events, and member registrations for a non-profit organization using PHP, Laravel, and MySQL."
             ]
           }
         ]
@@ -116,51 +116,51 @@ class PortfolioModel {
       {
         id: "terra-education",
         name: "Terra Education Portal & CMS",
-        timeline: "Meijun LLC (Dec 2023 - Jul 2026)[cite: 1]",
-        summary: "Comprehensive educational web system and CMS supporting dynamic workflows, data reconciliation, and integrated observability[cite: 1].",
-        tech: ["React.js", "Node.js", "PostgreSQL", "AWS Lambda", "Datadog API", "Typeform API", "Jira API", "Salesforce"][cite: 1],
+        timeline: "Meijun LLC (Dec 2023 - Jul 2026)",
+        summary: "Comprehensive educational web system and CMS supporting dynamic workflows, data reconciliation, and integrated observability.",
+        tech: ["React.js", "Node.js", "PostgreSQL", "AWS Lambda", "Datadog API", "Typeform API", "Jira API", "Salesforce"],
         points: [
-          "Engineered full-stack features with the PERN stack (React.js, Node.js, PostgreSQL)[cite: 1].",
-          "Built dynamic form ingestion workflows leveraging Typeform API integration[cite: 1].",
-          "Configured AWS Lambda for event-driven serverless background automation[cite: 1].",
-          "Engineered end-to-end observability by combining Datadog APM, Error Tracking, Session Replay, and automated Jira ticket creation[cite: 1].",
-          "Handled database schema definitions, query tuning, and client-level data reconciliation with Salesforce[cite: 1]."
+          "Engineered full-stack features with the PERN stack (React.js, Node.js, PostgreSQL).",
+          "Built dynamic form ingestion workflows leveraging Typeform API integration.",
+          "Configured AWS Lambda for event-driven serverless background automation.",
+          "Engineered end-to-end observability by combining Datadog APM, Error Tracking, Session Replay, and automated Jira ticket creation.",
+          "Handled database schema definitions, query tuning, and client-level data reconciliation with Salesforce."
         ],
         hasCaseStudy: true
       },
       {
         id: "rock-church-project",
         name: "RCP (Rock Church Project)",
-        timeline: "Meijun LLC (Dec 2023 - Jun 2024)[cite: 1]",
-        summary: "Church management web platform featuring dynamic administrative interfaces and data controls[cite: 1].",
-        tech: ["PHP", "Laravel", "Livewire", "MySQL"][cite: 1],
+        timeline: "Meijun LLC (Dec 2023 - Jun 2024)",
+        summary: "Church management web platform featuring dynamic administrative interfaces and data controls.",
+        tech: ["PHP", "Laravel", "Livewire", "MySQL"],
         points: [
-          "Implemented new functional modules and reactive frontend views using Laravel and Livewire[cite: 1].",
-          "Executed UI enhancements, addressed system bug fixes, and maintained relational database schema on MySQL[cite: 1]."
+          "Implemented new functional modules and reactive frontend views using Laravel and Livewire.",
+          "Executed UI enhancements, addressed system bug fixes, and maintained relational database schema on MySQL."
         ],
         hasCaseStudy: false
       },
       {
         id: "make-it-memories",
         name: "MakeItMemories",
-        timeline: "Makopa Inc (Nov 2023 - Dec 2023)[cite: 1]",
-        summary: "Interactive online photo and media gallery application for users to upload and share digital memories[cite: 1].",
-        tech: ["PHP", "Laravel", "MySQL", "CSS3", "JavaScript"][cite: 1],
+        timeline: "Makopa Inc (Nov 2023 - Dec 2023)",
+        summary: "Interactive online photo and media gallery application for users to upload and share digital memories.",
+        tech: ["PHP", "Laravel", "MySQL", "CSS3", "JavaScript"],
         points: [
-          "Engineered media upload, storage association, and gallery presentation flows[cite: 1].",
-          "Built data structures in MySQL to support member albums, user interactions, and asset collections[cite: 1]."
+          "Engineered media upload, storage association, and gallery presentation flows.",
+          "Built data structures in MySQL to support member albums, user interactions, and asset collections."
         ],
         hasCaseStudy: false
       },
       {
         id: "salam-org",
         name: "Salam Organization System",
-        timeline: "Makopa Inc (Sep 2023)[cite: 1]",
-        summary: "Web platform designed for managing non-profit organizational activities, community events, and membership registrations[cite: 1].",
-        tech: ["PHP", "Laravel", "MySQL", "REST APIs"][cite: 1],
+        timeline: "Makopa Inc (Sep 2023)",
+        summary: "Web platform designed for managing non-profit organizational activities, community events, and membership registrations.",
+        tech: ["PHP", "Laravel", "MySQL", "REST APIs"],
         points: [
-          "Built registration portals, activity trackers, and member management directories[cite: 1].",
-          "Structured backend validation, access control, and database workflows in MySQL[cite: 1]."
+          "Built registration portals, activity trackers, and member management directories.",
+          "Structured backend validation, access control, and database workflows in MySQL."
         ],
         hasCaseStudy: false
       }
@@ -170,72 +170,72 @@ class PortfolioModel {
       {
         tier: "01. CLIENT FRONT",
         desc: "Interactive UI & Component State",
-        techs: ["React.js", "Livewire / Blade", "HTML5 / CSS3 / ES6+"][cite: 1]
+        techs: ["React.js", "Livewire / Blade", "HTML5 / CSS3 / ES6+"]
       },
       {
         tier: "02. API GATEWAY",
         desc: "Ingestion Pipelines & Webhooks",
-        techs: ["REST APIs", "Typeform Webhook Hook", "Jira API Sync"][cite: 1]
+        techs: ["REST APIs", "Typeform Webhook Hook", "Jira API Sync"]
       },
       {
         tier: "03. COMPUTE SERVICES",
         desc: "Serverless & Application Logic",
-        techs: ["Node.js Services", "PHP Laravel", "AWS Lambda Handlers"][cite: 1]
+        techs: ["Node.js Services", "PHP Laravel", "AWS Lambda Handlers"]
       },
       {
         tier: "04. PERSISTENCE",
         desc: "Relational Queries & Alignments",
-        techs: ["PostgreSQL", "MySQL", "Salesforce Alignments"][cite: 1]
+        techs: ["PostgreSQL", "MySQL", "Salesforce Alignments"]
       },
       {
         tier: "05. OBSERVABILITY",
         desc: "APM Telemetry & Diagnostics",
-        techs: ["Datadog APM & Replay", "AWS CloudWatch", "Athena & QuickSight"][cite: 1]
+        techs: ["Datadog APM & Replay", "AWS CloudWatch", "Athena & QuickSight"]
       }
     ];
 
     this.education = [
       {
-        degree: "Bachelor of Science in Computer Engineering[cite: 1]",
-        school: "Systems Technology Institute College[cite: 1]",
-        location: "Malolos, Bulacan[cite: 1]",
-        period: "2019 - 2023[cite: 1]",
+        degree: "Bachelor of Science in Computer Engineering",
+        school: "Systems Technology Institute College",
+        location: "Malolos, Bulacan",
+        period: "2019 - 2023",
         honors: [
-          "Cum Laude[cite: 1]",
-          "Best Thesis Award[cite: 1]",
-          "packetHACKS 2023 Hackathon Competition Finalist for Smart Utility at The Internet of Things Conference[cite: 1]"
+          "Cum Laude",
+          "Best Thesis Award",
+          "packetHACKS 2023 Hackathon Competition Finalist for Smart Utility at The Internet of Things Conference"
         ]
       },
       {
-        degree: "Bachelor of Industrial Technology (Mechatronics)[cite: 1]",
-        school: "Bulacan State University[cite: 1]",
-        location: "Malolos, Bulacan[cite: 1]",
-        period: "2015 - 2019[cite: 1]",
+        degree: "Bachelor of Industrial Technology (Mechatronics)",
+        school: "Bulacan State University",
+        location: "Malolos, Bulacan",
+        period: "2015 - 2019",
         honors: []
       }
     ];
 
     this.references = [
       {
-        name: "Aldrich Ralleigh C. Nueva[cite: 1]",
-        role: "Senior Software Engineer[cite: 1]",
-        company: "DXC Technology[cite: 1]",
-        contact: "+63 956-537-4358[cite: 1]",
-        email: "aldrich.ralleigh.nueva@gmail.com[cite: 1]"
+        name: "Aldrich Ralleigh C. Nueva",
+        role: "Senior Software Engineer",
+        company: "DXC Technology",
+        contact: "+63 956-537-4358",
+        email: "aldrich.ralleigh.nueva@gmail.com"
       },
       {
-        name: "Tsuyoshi Candelario[cite: 1]",
-        role: "Software Engineer[cite: 1]",
-        company: "Tyler Technology[cite: 1]",
-        contact: "Upon Request[cite: 1]",
-        email: "tsuyoshic2@gmail.com[cite: 1]"
+        name: "Tsuyoshi Candelario",
+        role: "Software Engineer",
+        company: "Tyler Technology",
+        contact: "Upon Request",
+        email: "tsuyoshic2@gmail.com"
       },
       {
-        name: "Aaron Jaye Junatas[cite: 1]",
-        role: "Software Engineer[cite: 1]",
-        company: "Zywave Philippines[cite: 1]",
-        contact: "+63 961-605-9806[cite: 1]",
-        email: "aaron.junatas@zywave.com[cite: 1]"
+        name: "Aaron Jaye Junatas",
+        role: "Software Engineer",
+        company: "Zywave Philippines",
+        contact: "+63 961-605-9806",
+        email: "aaron.junatas@zywave.com"
       }
     ];
 
@@ -735,7 +735,7 @@ class PortfolioView {
           <div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1">
             <div>
               <span class="font-bold text-slate-900 dark:text-white text-sm sm:text-base">${exp.role}</span>
-              <span class="text-slate-500 dark:text-gray-400 text-xs sm:ml-2">| ${exp.company}, ${exp.location}</span>
+              <span class="text-slate-500 dark:text-gray-400 text-xs sm:ml-2">| ${exp.company}, {exp.location}</span>
             </div>
             <span class="font-mono text-xs text-indigo-600 dark:text-indigo-400 font-medium">${exp.period}</span>
           </div>
@@ -822,7 +822,6 @@ class PortfolioView {
   }
 
   init3DTilt() {
-    // Only bind tilt on pointer-fine desktop environments to avoid mobile viewport jitter
     if (!window.matchMedia("(pointer: fine)").matches) return;
 
     const cards = document.querySelectorAll(".interactive-card");
