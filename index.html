@@ -82,13 +82,13 @@
   <!-- Dynamic Cursor Flashlight Glow (Desktop Only) -->
   <div id="cursor-glow" class="pointer-events-none fixed -inset-px z-30 transition-opacity duration-300 opacity-60 hidden md:block"></div>
 
-  <!-- Ambient Blurred Cosmic Orb (Confined within overflow-hidden wrapper) -->
-  <div class="fixed inset-0 overflow-hidden pointer-events-none -z-10">
-    <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] sm:w-[650px] h-[350px] sm:h-[650px] bg-indigo-500/10 dark:bg-indigo-600/10 rounded-full blur-[90px] sm:blur-[140px] animate-mesh-spin"></div>
+  <!-- Ambient Cosmic Orb Container (Strictly clipped) -->
+  <div class="fixed inset-0 overflow-hidden pointer-events-none -z-10 w-full max-w-full">
+    <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[320px] sm:w-[550px] h-[320px] sm:h-[550px] bg-indigo-500/10 dark:bg-indigo-600/10 rounded-full blur-[80px] sm:blur-[130px] animate-mesh-spin"></div>
   </div>
 
   <!-- Sticky Navbar -->
-  <header class="sticky top-0 z-40 w-full glass-panel transition-all duration-200 shadow-sm">
+  <header class="fixed top-0 left-0 right-0 z-40 w-full glass-panel transition-all duration-200 shadow-sm">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
       <a href="#home" class="nav-link flex items-center gap-2 group cursor-pointer max-w-[70%] sm:max-w-none">
         <div class="relative flex-shrink-0">
@@ -150,7 +150,7 @@
     <div id="mobile-menu" class="hidden md:hidden border-b border-slate-200 dark:border-gray-800 bg-white/95 dark:bg-[#0b0f19]/95 px-4 pt-2 pb-4 space-y-1 shadow-lg w-full max-w-full"></div>
   </header>
 
-  <main class="flex-grow relative z-10 w-full max-w-full overflow-hidden">
+  <main class="flex-grow relative z-10 w-full max-w-full overflow-x-hidden pt-16">
     <!-- 1. HERO SECTION -->
     <section id="home" class="scroll-mt-20 relative min-h-[92vh] flex items-center border-b border-slate-200 dark:border-gray-800/60 overflow-hidden py-12 sm:py-16 lg:py-24">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center relative z-10">
